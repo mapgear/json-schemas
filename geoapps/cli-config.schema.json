@@ -36,6 +36,20 @@
                         }
                     }
                 },
+                "ports": {
+                    "type": "object",
+                    "description": "Setup the ports used for the local webserver and proxyserver that is used",
+                    "properties": {
+                        "web": {
+                            "type": "number",
+                            "description": "The port of the web server that is running the app. Defaults to 8080"
+                        },
+                        "proxy": {
+                            "type": "number",
+                            "description": "The port of the web server that is running the app. Defaults to 8081"
+                        }
+                    }
+                },
                 "appConfig": {
                     "type": "object",
                     "description": "The app configuration used when running the current app in debug mode",
