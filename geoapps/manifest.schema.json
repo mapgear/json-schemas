@@ -1,0 +1,245 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "GeoApps Manifest",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string",
+        "description": "Version of the manifest",
+        "enum": [
+          "1.0"
+        ]
+      },
+      "app": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique id of the app in the form of a GUID"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the app as shown in the UI"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the app"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author of the app, as registered in the GeoApps Store"
+          },
+          "version": {
+            "type": "string",
+            "description": "Display version of the app"
+          },
+          "main": {
+            "type": "string",
+            "description": "Main file of the app which is rendered in GeoApps"
+          },
+          "maxScreens": {
+            "type": "number",
+            "description": "Maximum amount of screens that the app supports"
+          },
+          "branding": {
+            "type": "object",
+            "description": "Configures support for branding options for the app",
+            "properties": {
+              "main": {
+                "type": "string",
+                "description": "Main less file for the styling"
+              },
+              "themes": {
+                "type": "array",
+                "description": "One or more themes for the app",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "themeId": {
+                      "type": "string",
+                      "description": "Unique UUID of the theme"
+                    },
+                    "default": {
+                      "type": "boolean",
+                      "description": "Whether this theme is the default theme of the app"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Display name of the theme"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description of the theme"
+                    },
+                    "variables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "Unique key of the variable"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "Title of the variable"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "Type of the variable",
+                            "enum": [
+                              "File",
+                              "Text",
+                              "Color"
+                            ]
+                          },
+                          "value": {
+                            "type": "string",
+                            "description": "Value of the variable"
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "title",
+                          "type",
+                          "value"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "themeId",
+                    "title"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "main",
+              "themes"
+            ]
+          },
+          "screens": {
+            "type": "array",
+            "description": "Define one or multiple screens template",
+            "items": {
+              "type": "object",
+              "properties": {
+                "screen": {
+                  "type": "string",
+                  "description": "Unique key of the screen"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Title of the screen template"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the screen template"
+                },
+                "order": {
+                  "type": "number",
+                  "description": "Relative order of the screen templates which defines the sorting order in the manager"
+                },
+                "settings": {
+                  "type": "array",
+                  "description": "List of screen settings",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "description": "Unique key of the setting"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Title of the setting"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description of the setting"
+                      },
+                      "defaultValue": {
+                        "type": "string",
+                        "description": "Default value of the setting, used when creating a new screen"
+                      },
+                      "fieldType": {
+                        "type": "string",
+                        "description": "Type of field",
+                        "enum": [
+                          "text"
+                        ]
+                      },
+                      "required": {
+                        "type": "boolean",
+                        "description": "Whether the field is required to enter a value. When required, a default value must be set"
+                      }
+                    },
+                    "required": [
+                      "key",
+                      "title",
+                      "fieldType"
+                    ]
+                  }
+                },
+                "slots": {
+                  "type": "array",
+                  "description": "Slots for the blocks inside the screen",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "slot": {
+                        "type": "number",
+                        "description": "Number of the slot"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Display title of the slot"
+                      },
+                      "defaultBlock": {
+                        "type": "string",
+                        "description": "The default block of the slot. If not specified, default is set to TEXT"
+                      },
+                      "allowedBlocks": {
+                        "type": "array",
+                        "description": "The blocks that can be selected in this slot",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "deniedBlocks": {
+                        "type": "array",
+                        "description": "The blocks cannot be selected in this slot. If allowedBlocks is also set, allowedBlocks is preferred",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "slot",
+                      "title"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "screen",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "author",
+          "version",
+          "main",
+          "branding"
+        ]
+      }
+    },
+    "required": [
+      "version"
+    ]
+  }

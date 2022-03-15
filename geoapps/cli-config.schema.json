@@ -1,0 +1,68 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "GeoApps Development config file",
+    "type": "object",
+    "properties": {
+        "package": {
+            "type": "object",
+            "description": "Information related to the app package",
+            "properties": {
+                "contentDirs": {
+                    "type": "array",
+                    "description": "Directories that are included in the app package as part of the app itself"
+                }
+            },
+            "additionalProperties": false
+        },
+        "debug": {
+            "type": "object",
+            "description": "Options to specify used combined with the local `serve`-command, to retrieve for instance protected resources from a GeoApps environment",
+            "properties": {
+                "tenant": {
+                    "type": "string",
+                    "description": "The GeoApps environment used for testing, e.g. <tenant>.geoapps.nl where tenant is your personal environemnt"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "When you want to connect with protected resources, place your token here. The token can be generated on https://login.geoapps.nl/token/generatePAT"
+                },
+                "browser": {
+                    "type": "object",
+                    "description": "Configuration of the browser during debug",
+                    "properties": {
+                        "autoOpen": {
+                            "type": "boolean",
+                            "description": "Whether the default browser should open automatically when running geoapps serve"
+                        }
+                    }
+                },
+                "appConfig": {
+                    "type": "object",
+                    "description": "The app configuration used when running the current app in debug mode",
+                    "properties": {
+                        "mode": {
+                            "type": "enum",
+                            "description": "The app configuration mode. With remote, the appId specifies which config should be used. With local, the config object should contain the app configuration",
+                            "values": [
+                                "remote",
+                                "local"
+                            ]
+                        },
+                        "appId": {
+                            "type": "string",
+                            "description": "The identifier of the remote app configuration that is used to start the local app"
+                        }
+                    },
+                    "required": [
+                        "mode"
+                    ]
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "tenant"
+            ]
+        }
+    },
+    "additionalProperties": false
+}
