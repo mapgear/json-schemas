@@ -55,9 +55,9 @@
                     "description": "The app configuration used when running the current app in debug mode",
                     "properties": {
                         "mode": {
-                            "type": "enum",
+                            "type": "string",
                             "description": "The app configuration mode. With remote, the appId specifies which config should be used. With local, the config object should contain the app configuration",
-                            "values": [
+                            "enum": [
                                 "remote",
                                 "local"
                             ]
